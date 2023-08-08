@@ -11,7 +11,7 @@ internal class PostConfiguration : IEntityTypeConfiguration<Post>
     {
         builder.HasIndex(u => u.Author);
 
-        Post postA = new Post
+        Post postA = new()
         {
             Id = 1,
             Author = "alpery",
@@ -21,9 +21,9 @@ internal class PostConfiguration : IEntityTypeConfiguration<Post>
             DateModified = DateTime.Now,
         };
 
-        Post postB = new Post
+        Post postB = new()
         {
-            Id = 1,
+            Id = 2,
             Author = "alpery",
             Description = "Some user post by alpery",
             Title = "postB",
@@ -31,9 +31,9 @@ internal class PostConfiguration : IEntityTypeConfiguration<Post>
             DateModified = DateTime.Now,
         };
 
-        Post postC = new Post
+        Post postC = new()
         {
-            Id = 1,
+            Id = 3,
             Author = "alpery",
             Description = "Some user post by alpery",
             Title = "postC",

@@ -35,7 +35,7 @@ builder.Host.AddCustomSerilog();
 if (builder.Environment.IsDevelopment())
     services.AddSwaggerServices();
 
-//string conStr = "server=localhost;port=3306;database=ECommerceItemAPI;user=root;password=pass;";
+//string conStr = "server=localhost;port=3306;database=BasicLayeredAPI;user=root;password=pass;";
 //string conStr = configuration.GetConnectionString("DefaultConnection");
 string conStr = Environment.GetEnvironmentVariable("DB_CON_STR");
 services.AddDbContext<PostingAPIDbContext>(options => options.UseMySQL(conStr));
@@ -44,6 +44,8 @@ services.AddScoped<IPostRepo, DBPostRepo>();
 
 services.AddAuthServices();
 services.AddHttpClients();
+
+services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 
