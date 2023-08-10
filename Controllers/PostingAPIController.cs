@@ -39,7 +39,7 @@ public class PostingAPIController
 
     [HttpGet]
     [Route("author/{author}")]
-    public async Task<ResponseDto<List<Post>>> GetByAuthorAsync(string author)
+    public async Task<ResponseDto<List<Post>>> GetByAuthorAsync(string author)//
     {
         var posts = await _repo.GetByAuthorAsync(author);
 
