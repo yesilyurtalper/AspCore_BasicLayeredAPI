@@ -1,8 +1,8 @@
 ﻿
 using Microsoft.OpenApi.Models;
-using BasicLayeredAPI.API.Models;
+using BasicLayeredService.API.Models;
 
-namespace BasicLayeredAPI.API.Extensions;
+namespace BasicLayeredService.API.Extensions;
 
 public static class SwaggerServiceRegistration
 {

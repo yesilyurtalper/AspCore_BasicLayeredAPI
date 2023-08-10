@@ -1,6 +1,6 @@
-﻿using BasicLayeredAPI.API.Middleware;
+﻿using BasicLayeredService.API.Middleware;
 
-namespace BasicLayeredAPI.API.Extensions;
+namespace BasicLayeredService.API.Extensions;
 
 public static class CustomMiddlewareRegistration
 {

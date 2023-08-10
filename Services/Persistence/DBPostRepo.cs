@@ -1,10 +1,10 @@
 ﻿
-using BasicLayeredAPI.API.Domain;
-using BasicLayeredAPI.API.DBContext;
-using BasicLayeredAPI.API.Contracts.Persistence;
+using BasicLayeredService.API.Domain;
+using BasicLayeredService.API.DBContext;
+using BasicLayeredService.API.Contracts.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace BasicLayeredAPI.API.Services.Persistence;
+namespace BasicLayeredService.API.Services.Persistence;
 
 public class DBPostRepo : IPostRepo
 {

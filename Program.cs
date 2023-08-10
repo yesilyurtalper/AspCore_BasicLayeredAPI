@@ -1,11 +1,11 @@
 
 using System.Text.Json.Serialization;
-using BasicLayeredAPI.API.Filters;
-using BasicLayeredAPI.API.Extensions;
-using BasicLayeredAPI.API.DBContext;
-using BasicLayeredAPI.API.Services.Persistence;
-using BasicLayeredAPI.API.Constants;
-using BasicLayeredAPI.API.Contracts.Persistence;
+using BasicLayeredService.API.Filters;
+using BasicLayeredService.API.Extensions;
+using BasicLayeredService.API.DBContext;
+using BasicLayeredService.API.Services.Persistence;
+using BasicLayeredService.API.Constants;
+using BasicLayeredService.API.Contracts.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,7 +35,7 @@ builder.Host.AddCustomSerilog();
 if (builder.Environment.IsDevelopment())
     services.AddSwaggerServices();
 
-//string conStr = "server=localhost;port=3306;database=BasicLayeredAPI;user=root;password=pass;";
+//string conStr = "server=localhost;port=3306;database=BasicLayeredService;user=root;password=pass;";
 //string conStr = configuration.GetConnectionString("DefaultConnection");
 string conStr = Environment.GetEnvironmentVariable("DB_CON_STR");
 services.AddDbContext<PostingAPIDbContext>(options => options.UseMySQL(conStr));
@@ -85,6 +85,6 @@ app.UseCors("all");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers().RequireAuthorization(APIConstants.BasicLayeredAPIWebClient);
+app.MapControllers().RequireAuthorization(APIConstants.BasicLayeredServiceWebClient);
 
 app.Run();

@@ -1,10 +1,10 @@
-﻿using BasicLayeredAPI.API.Constants;
-using BasicLayeredAPI.API.HttpHandlers;
+﻿using BasicLayeredService.API.Constants;
+using BasicLayeredService.API.HttpHandlers;
 using Polly;
-using BasicLayeredAPI.API.Contracts;
-using BasicLayeredAPI.API.Services;
+using BasicLayeredService.API.Contracts;
+using BasicLayeredService.API.Services;
 
-namespace BasicLayeredAPI.API.Extensions;
+namespace BasicLayeredService.API.Extensions;
 
 public static class HttpClientRegistration
 {

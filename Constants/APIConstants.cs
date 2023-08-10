@@ -1,4 +1,4 @@
-﻿namespace BasicLayeredAPI.API.Constants;
+﻿namespace BasicLayeredService.API.Constants;
 
 public class APIConstants
 {
@@ -9,6 +9,6 @@ public class APIConstants
     };
     public static string OrderAPIClient = "OrderAPIClient";
     public static string OrderAPIBaseUrl = "OrderAPIClient";
-    public static string BasicLayeredAPIWebClient = "BasicLayeredAPIWebClient";
-    public static string BasicLayeredAPIAdmin = "BasicLayeredAPIAdmin";
+    public static string BasicLayeredServiceWebClient = "BasicLayeredServiceWebClient";
+    public static string BasicLayeredServiceAdmin = "BasicLayeredServiceAdmin";
 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
-using BasicLayeredAPI.API.DTOs;
-using BasicLayeredAPI.API.Models;
+using BasicLayeredService.API.DTOs;
+using BasicLayeredService.API.Models;
 
-namespace BasicLayeredAPI.API.Filters;
+namespace BasicLayeredService.API.Filters;
 
 [AttributeUsage(AttributeTargets.Method)]
 public class ResultLoggerAttribute : Attribute, IAsyncResultFilter

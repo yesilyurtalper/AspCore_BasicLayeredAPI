@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 
-namespace BasicLayeredAPI.API.HttpHandlers;
+namespace BasicLayeredService.API.HttpHandlers;
 
 public class AuthHeaderHandler : DelegatingHandler
 {

@@ -1,8 +1,8 @@
 ﻿
-using BasicLayeredAPI.API.Constants;
-using BasicLayeredAPI.API.DTOs;
+using BasicLayeredService.API.Constants;
+using BasicLayeredService.API.DTOs;
 
-namespace BasicLayeredAPI.API.Middleware;
+namespace BasicLayeredService.API.Middleware;
 
 public class ErrorMiddleware
 {

@@ -2,7 +2,7 @@
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace BasicLayeredAPI.API.Models;
+namespace BasicLayeredService.API.Models;
 
 public class AuthenticationRequirementsOperationFilter : IOperationFilter
 {

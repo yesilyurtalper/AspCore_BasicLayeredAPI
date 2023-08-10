@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BasicLayeredAPI.API.Domain;
+namespace BasicLayeredService.API.Domain;
 
 public class Post
 {

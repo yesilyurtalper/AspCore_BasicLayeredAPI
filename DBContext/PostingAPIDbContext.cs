@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using BasicLayeredAPI.API.Domain;
+using BasicLayeredService.API.Domain;
 
-namespace BasicLayeredAPI.API.DBContext;
+namespace BasicLayeredService.API.DBContext;
 
 public class PostingAPIDbContext : DbContext
 {

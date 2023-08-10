@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using BasicLayeredAPI.API;
-using BasicLayeredAPI.API.Contracts.Persistence;
-using BasicLayeredAPI.API.DTOs;
-using BasicLayeredAPI.API.Domain;
-using BasicLayeredAPI.API.Exceptions;
+using BasicLayeredService.API;
+using BasicLayeredService.API.Contracts.Persistence;
+using BasicLayeredService.API.DTOs;
+using BasicLayeredService.API.Domain;
+using BasicLayeredService.API.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce.APIs.ItemAPI.Controllers;

@@ -1,4 +1,4 @@
-﻿namespace BasicLayeredAPI.API.DTOs;
+﻿namespace BasicLayeredService.API.DTOs;
 
 public class ResponseDtoBase 
 {

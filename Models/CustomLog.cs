@@ -1,6 +1,6 @@
-﻿using BasicLayeredAPI.API.DTOs;
+﻿using BasicLayeredService.API.DTOs;
 
-namespace BasicLayeredAPI.API.Models;
+namespace BasicLayeredService.API.Models;
 
 public class CustomLog
 {

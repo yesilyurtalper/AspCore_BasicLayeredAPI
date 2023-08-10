@@ -1,11 +1,11 @@
-﻿using BasicLayeredAPI.API.DTOs;
+﻿using BasicLayeredService.API.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BasicLayeredAPI.API.Contracts;
+namespace BasicLayeredService.API.Contracts;
 
 public interface IOrderService
 {

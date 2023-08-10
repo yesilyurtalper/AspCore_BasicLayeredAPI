@@ -1,7 +1,7 @@
 ﻿
-using BasicLayeredAPI.API.Domain;
+using BasicLayeredService.API.Domain;
 
-namespace BasicLayeredAPI.API.Contracts.Persistence;
+namespace BasicLayeredService.API.Contracts.Persistence;
 
 public interface IPostRepo
 {

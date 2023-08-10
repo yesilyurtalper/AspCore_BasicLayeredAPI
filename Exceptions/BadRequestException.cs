@@ -1,5 +1,5 @@
 ﻿
-namespace BasicLayeredAPI.API.Exceptions;
+namespace BasicLayeredService.API.Exceptions;
 
 public class BadRequestException : Exception
 {

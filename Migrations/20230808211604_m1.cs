@@ -6,7 +6,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace BasicLayeredAPI.API.Migrations
+namespace BasicLayeredService.API.Migrations
 {
     /// <inheritdoc />
     public partial class m1 : Migration

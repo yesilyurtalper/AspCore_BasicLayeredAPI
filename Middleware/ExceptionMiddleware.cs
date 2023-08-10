@@ -1,9 +1,9 @@
 ﻿
-using BasicLayeredAPI.API.DTOs;
-using BasicLayeredAPI.API.Exceptions;
+using BasicLayeredService.API.DTOs;
+using BasicLayeredService.API.Exceptions;
 using System.Net;
 
-namespace BasicLayeredAPI.API.Middleware;
+namespace BasicLayeredService.API.Middleware;
 
 public class ExceptionMiddleware
 {

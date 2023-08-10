@@ -1,7 +1,7 @@
 ﻿using Serilog;
 using Serilog.Sinks.Elasticsearch;
 
-namespace BasicLayeredAPI.API.Extensions;
+namespace BasicLayeredService.API.Extensions;
 
 public static class SerilogRegistration
 {
@@ -13,7 +13,7 @@ public static class SerilogRegistration
                 new ElasticsearchSinkOptions(node: new Uri(Environment.GetEnvironmentVariable("ELK_URL")))
                 {
                     AutoRegisterTemplate = true,
-                    IndexFormat = $"BasicLayeredAPI-logs-{DateTime.Now:yyyy-MM-dd}",
+                    IndexFormat = $"BasicLayeredService-logs-{DateTime.Now:yyyy-MM-dd}",
                     ModifyConnectionSettings = x => x.BasicAuthentication(
                         Environment.GetEnvironmentVariable("ELK_USER"),
                         Environment.GetEnvironmentVariable("ELK_PASS"))
@@ -24,7 +24,7 @@ public static class SerilogRegistration
             .Enrich.WithMachineName()
             .Enrich.WithEnvironmentUserName()
             .Enrich.WithClientIp()
-            .Enrich.WithProperty("AppName", "BasicLayeredAPIAPI")
+            .Enrich.WithProperty("AppName", "BasicLayeredServiceAPI")
             .Enrich.WithCorrelationIdHeader(headerKey: "x-correlation-id")
             .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
             .MinimumLevel.Override("System", Serilog.Events.LogEventLevel.Warning);

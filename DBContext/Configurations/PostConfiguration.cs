@@ -1,9 +1,9 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using BasicLayeredAPI.API.Domain;
+using BasicLayeredService.API.Domain;
 
-namespace BasicLayeredAPI.API.DBContext.Configurations;
+namespace BasicLayeredService.API.DBContext.Configurations;
 
 internal class PostConfiguration : IEntityTypeConfiguration<Post>
 {

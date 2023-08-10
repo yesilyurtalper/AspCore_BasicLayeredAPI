@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
-using BasicLayeredAPI.API.DTOs;
+using BasicLayeredService.API.DTOs;
 
-namespace BasicLayeredAPI.API.Filters;
+namespace BasicLayeredService.API.Filters;
 
 public class ValidationFilter : IAsyncActionFilter
 {

@@ -1,8 +1,8 @@
-﻿using BasicLayeredAPI.API.Constants;
-using BasicLayeredAPI.API.Contracts;
-using BasicLayeredAPI.API.DTOs;
+﻿using BasicLayeredService.API.Constants;
+using BasicLayeredService.API.Contracts;
+using BasicLayeredService.API.DTOs;
 
-namespace BasicLayeredAPI.API.Services;
+namespace BasicLayeredService.API.Services;
 
 internal class OrderService : IOrderService
 {

@@ -1,8 +1,8 @@
 ﻿
 using Microsoft.IdentityModel.Tokens;
-using BasicLayeredAPI.API.Constants;
+using BasicLayeredService.API.Constants;
 
-namespace BasicLayeredAPI.API.Extensions;
+namespace BasicLayeredService.API.Extensions;
 
 public static class AuthServiceRegistration
 {
@@ -15,7 +15,7 @@ public static class AuthServiceRegistration
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateAudience = true,
-                ValidAudiences = new[] { "BasicLayeredAPIAPI", "BasicLayeredAPIWebClient_React" },
+                ValidAudiences = new[] { "BasicLayeredServiceAPI", "BasicLayeredServiceWebClient_React" },
                 ValidateIssuer = true,
                 ValidIssuers = new List<string> { 
                     "http://localhost:8080/auth/realms/local_realm",
@@ -26,17 +26,17 @@ public static class AuthServiceRegistration
 
         services.AddAuthorization(options =>
         {
-            options.AddPolicy(APIConstants.BasicLayeredAPIWebClient, policy =>
+            options.AddPolicy(APIConstants.BasicLayeredServiceWebClient, policy =>
             {
-                policy.RequireClaim(APIConstants.BasicLayeredAPIWebClient, APIConstants.BasicLayeredAPIWebClient);
+                policy.RequireClaim(APIConstants.BasicLayeredServiceWebClient, APIConstants.BasicLayeredServiceWebClient);
             });
         });
 
         services.AddAuthorization(options =>
         {
-            options.AddPolicy(APIConstants.BasicLayeredAPIAdmin, policy =>
+            options.AddPolicy(APIConstants.BasicLayeredServiceAdmin, policy =>
             {
-                policy.RequireClaim("RealmRole", APIConstants.BasicLayeredAPIAdmin);
+                policy.RequireClaim("RealmRole", APIConstants.BasicLayeredServiceAdmin);
             });
         });
 
