@@ -15,7 +15,7 @@ public static class AuthServiceRegistration
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateAudience = true,
-                ValidAudiences = new[] { "BasicLayeredServiceAPI", "BasicLayeredServiceWebClient_React" },
+                ValidAudiences = new[] { "BasicLayeredServiceAPI", "BasicLayeredServiceClient_React" },
                 ValidateIssuer = true,
                 ValidIssuers = new List<string> { 
                     "http://localhost:8080/auth/realms/local_realm",
@@ -26,9 +26,9 @@ public static class AuthServiceRegistration
 
         services.AddAuthorization(options =>
         {
-            options.AddPolicy(APIConstants.BasicLayeredServiceWebClient, policy =>
+            options.AddPolicy(APIConstants.BasicLayeredServiceClient, policy =>
             {
-                policy.RequireClaim(APIConstants.BasicLayeredServiceWebClient, APIConstants.BasicLayeredServiceWebClient);
+                policy.RequireClaim(APIConstants.BasicLayeredServiceClient, APIConstants.BasicLayeredServiceClient);
             });
         });
 

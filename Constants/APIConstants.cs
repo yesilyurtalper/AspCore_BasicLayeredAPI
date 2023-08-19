@@ -9,6 +9,6 @@ public class APIConstants
     };
     public static string OrderAPIClient = "OrderAPIClient";
     public static string OrderAPIBaseUrl = "OrderAPIClient";
-    public static string BasicLayeredServiceWebClient = "BasicLayeredServiceWebClient";
+    public static string BasicLayeredServiceClient = "BasicLayeredServiceClient";
     public static string BasicLayeredServiceAdmin = "BasicLayeredServiceAdmin";
 }

@@ -76,15 +76,15 @@ if (app.Environment.IsDevelopment())
 //elasticAPMSettings.Add("ElasticApm:ServiceName", "ECommerce.ItemService");
 //app.UseAllElasticApm(new ConfigurationBuilder().AddInMemoryCollection(elasticAPMSettings).Build());
 
-app.UseCors("all");
-//app.UseCors(builder =>
-//    builder.WithOrigins(Environment.GetEnvironmentVariable("ALLOWED_ORIGINS").Split(","))
-//    .AllowAnyMethod().
-//    AllowAnyHeader());
+//app.UseCors("all");
+app.UseCors(builder =>
+    builder.WithOrigins("http://localhost:3000")//Environment.GetEnvironmentVariable("ALLOWED_ORIGINS").Split(","))
+    .AllowAnyMethod().
+    AllowAnyHeader());
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers().RequireAuthorization(APIConstants.BasicLayeredServiceWebClient);
+app.MapControllers().RequireAuthorization(APIConstants.BasicLayeredServiceClient);
 
 app.Run();
