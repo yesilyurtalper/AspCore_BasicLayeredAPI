@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using BasicLayeredService.API.Domain;
+using Microsoft.Extensions.Hosting;
 
 namespace BasicLayeredService.API.DBContext.Configurations;
 
@@ -11,38 +12,20 @@ internal class PostConfiguration : IEntityTypeConfiguration<Post>
     {
         builder.HasIndex(u => u.Author);
 
-        Post postA = new()
+        for(int i = 1; i <= 1000; i++)
         {
-            Id = 1,
-            Author = "alpery",
-            Description = "Some user post by alpery",
-            Title = "postA",
-            DateCreated = DateTime.Now,
-            DateModified = DateTime.Now,
-        };
+            Post post = new Post();
+            post.Id = i;
+            post.Author = $"author{i}";
+            post.Title = $"title{i}";
+            post.Body = $"body{i} " +
+                $"body{i} body{i} " +
+                $"body{i} body{i} body{i} " +
+                $"body{i}";
+            post.DateCreated = DateTime.Now;
+            post.DateModified = post.DateCreated;
 
-        Post postB = new()
-        {
-            Id = 2,
-            Author = "alpery",
-            Description = "Some user post by alpery",
-            Title = "postB",
-            DateCreated = DateTime.Now,
-            DateModified = DateTime.Now,
-        };
-
-        Post postC = new()
-        {
-            Id = 3,
-            Author = "alpery",
-            Description = "Some user post by alpery",
-            Title = "postC",
-            DateCreated = DateTime.Now,
-            DateModified = DateTime.Now,
-        };
-
-        builder.HasData(postA);
-        builder.HasData(postB);
-        builder.HasData(postC);
+            builder.HasData(post);
+        }
     }
 }

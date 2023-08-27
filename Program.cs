@@ -23,12 +23,6 @@ services.AddControllers(options => {
 
 services.AddScoped<ResultLoggerAttribute>();
 
-//services.AddLogging(loggingBuilder =>
-//{
-//    loggingBuilder.ClearProviders();
-//    loggingBuilder.AddSerilog();
-//});
-
 builder.Host.AddCustomSerilog();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

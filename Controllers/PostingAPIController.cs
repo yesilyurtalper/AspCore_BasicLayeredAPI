@@ -78,7 +78,8 @@ public class PostingAPIController
 
     [HttpDelete]
     [Route("delete/{id}")]
-    public async Task<ResponseDto<Post>> DeletePostAsync(int id)
+    public async Task<ResponseDto<Post>> DeletePostAsync(int id,
+        [FromServices] IHttpContextAccessor contextAccessor)
     {
         if (id == 0)
             throw new BadRequestException("Invalid input for Id");
@@ -86,6 +87,10 @@ public class PostingAPIController
         var post = await _repo.GetByIdAsync(id);
         if (post == null)
             throw new NotFoundException(nameof(Post), id);
+
+        if (post.Author != contextAccessor.HttpContext.User.Claims.
+                    FirstOrDefault(c => c.Type == "preferred_username").Value)
+            throw new NotAllowedException($"Authors are different");
 
         await _repo.DeleteAsync(post);
 
@@ -113,16 +118,19 @@ public class PostingAPIController
         if (model == null)
             throw new NotFoundException(nameof(Post), post.Id);
 
-        if(post.Author != contextAccessor.HttpContext.User.Claims.
+        if (post.Author != model.Author)
+            throw new NotAllowedException($"Authors are different");
+
+        if (post.Author != contextAccessor.HttpContext.User.Claims.
                     FirstOrDefault(c => c.Type == "preferred_username").Value)
-            throw new BadRequestException($"Authors are different");
+            throw new NotAllowedException($"Authors are different");
 
         //var existing = await _repo.GetByNameAsync(dto.Name);
         //if (existing != null && model.Id != existing.Id)
         //    throw new BadRequestException($"{typeof(TModel).Name} with name = {command._dto.Name} already exists!");
 
         model.Title = post.Title;
-        model.Description = post.Description;
+        model.Body = post.Body;
         model.DateModified = DateTime.UtcNow;
 
         await _repo.UpdateAsync(model);
@@ -139,11 +147,11 @@ public class PostingAPIController
         return response;
     }
 
-    [AllowAnonymous]
+    [Route("latest/{count}")]
     [HttpGet]
-    public async Task<ResponseDto<List<Post>>> GetAllAsync()//
+    public async Task<ResponseDto<List<Post>>> GetLatest(int count)
     {
-        var posts = await _repo.GetAllAsync();
+        var posts = await _repo.GetLatestAsync(count);
 
         if (posts.Count == 0)
             throw new NotFoundException($"No post found");

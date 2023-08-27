@@ -41,6 +41,9 @@ public class ExceptionMiddleware
             case NotFoundException:
                 statusCode = HttpStatusCode.NotFound;
                 break;
+            case NotAllowedException:
+                statusCode = HttpStatusCode.Forbidden;
+                break;
         }
 
         httpContext.Response.StatusCode = (int)statusCode;

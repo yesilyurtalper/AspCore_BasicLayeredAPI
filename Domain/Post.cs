@@ -10,7 +10,7 @@ public class Post
 
     [Required]
     [MaxLength(10000)]
-    public string Description { get; set; } = string.Empty;
+    public string Body { get; set; } = string.Empty;
 
     [Required]
     [MaxLength(100)]

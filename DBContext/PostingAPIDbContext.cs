@@ -13,6 +13,10 @@ public class PostingAPIDbContext : DbContext
         _httpContextAccessor = accessor;
     }
 
+    public PostingAPIDbContext(DbContextOptions<PostingAPIDbContext> options) : base(options)
+    {
+    }
+
     public DbSet<Post> Posts { get; set; }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

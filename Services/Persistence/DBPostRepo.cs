@@ -45,8 +45,9 @@ public class DBPostRepo : IPostRepo
         return await _dbSet.Where(x => x.Author == author).ToListAsync();
     }
 
-    public virtual async Task<List<Post>> GetAllAsync()
+    public virtual async Task<List<Post>> GetLatestAsync(int count)
     {
-        return await _dbSet.ToListAsync();
+        return await _dbSet.OrderByDescending(p => p.DateModified).
+            Take(count).ToListAsync();
     }
 }
