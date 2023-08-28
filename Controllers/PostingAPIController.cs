@@ -25,6 +25,22 @@ public class PostingAPIController
     }
 
     [HttpGet]
+    public async Task<ResponseDto<List<Post>>> GetLatest()
+    {
+        var posts = await _repo.GetLatestAsync(10);
+
+        if (posts.Count == 0)
+            throw new NotFoundException($"No post found");
+        else
+            return new ResponseDto<List<Post>>
+            {
+                IsSuccess = true,
+                Data = posts,
+                ResultCode = "200",
+            };
+    }
+
+    [HttpGet]
     [Route("id/{id}")]
     public async Task<ResponseDto<Post>> GetByPostIdAsync(int id)
     {   
@@ -60,6 +76,7 @@ public class PostingAPIController
 
     [HttpPost]
     [Route("create")]
+    [Route("id/{id}/copy")]
     public async Task<ResponseDto<Post>> CreatePostAsync(Post post)
     {
         await _repo.CreateAsync(post);
@@ -69,6 +86,7 @@ public class PostingAPIController
             IsSuccess = true,
             Data = post,
             ResultCode = "200",
+            Message = "Post created successfully!",
         };
 
         _logger.LogInformation("{@response}", response);
@@ -77,7 +95,7 @@ public class PostingAPIController
     }
 
     [HttpDelete]
-    [Route("delete/{id}")]
+    [Route("id/{id}")]
     public async Task<ResponseDto<Post>> DeletePostAsync(int id,
         [FromServices] IHttpContextAccessor contextAccessor)
     {
@@ -99,6 +117,7 @@ public class PostingAPIController
             IsSuccess = true,
             Data = post,
             ResultCode = "200",
+            Message = "Post deleted successfully!",
         };
 
         _logger.LogInformation("{@response}", response);
@@ -107,11 +126,11 @@ public class PostingAPIController
     }
 
     [HttpPut]
-    [Route("update")]
-    public async Task<ResponseDto<Post>> UpdatePostAsync([FromBody]Post post, 
+    [Route("id/{id}/update")]
+    public async Task<ResponseDto<Post>> UpdatePostAsync(int id, [FromBody]Post post, 
         [FromServices]IHttpContextAccessor contextAccessor)
     {
-        if (post == null || post.Id == 0)
+        if (post == null || post.Id == 0 || id != post.Id)
             throw new BadRequestException("No input or invalid input for Id");
 
         var model = await _repo.GetByIdAsync(post.Id);
@@ -140,27 +159,11 @@ public class PostingAPIController
             IsSuccess = true,
             Data = post,
             ResultCode = "200",
+            Message = "Post updated successfully!",
         };
 
         _logger.LogInformation("{@response}", response);
 
         return response;
-    }
-
-    [Route("latest/{count}")]
-    [HttpGet]
-    public async Task<ResponseDto<List<Post>>> GetLatest(int count)
-    {
-        var posts = await _repo.GetLatestAsync(count);
-
-        if (posts.Count == 0)
-            throw new NotFoundException($"No post found");
-        else
-            return new ResponseDto<List<Post>>
-            {
-                IsSuccess = true,
-                Data = posts,
-                ResultCode = "200",
-            };
     }
 }
