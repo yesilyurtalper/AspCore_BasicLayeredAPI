@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using BasicLayeredService.API.DBContext;
 
 namespace BasicLayeredService.API.DBContext;
-public class PostingAPIDBContextFActory : IDesignTimeDbContextFactory<PostingAPIDbContext>
+public class BaseItemDbContextFactory : IDesignTimeDbContextFactory<BaseItemDbContext>
 {
-    public PostingAPIDbContext CreateDbContext(string[] args)
+    public BaseItemDbContext CreateDbContext(string[] args)
     {
-        var optionsBuilder = new DbContextOptionsBuilder<PostingAPIDbContext>();
+        var optionsBuilder = new DbContextOptionsBuilder<BaseItemDbContext>();
         optionsBuilder.UseMySQL("server=localhost;port=3306;database=BasicLayeredService;user=root;password=pass;");
 
-        return new PostingAPIDbContext(optionsBuilder.Options);
+        return new BaseItemDbContext(optionsBuilder.Options);
     }
 }

@@ -3,25 +3,26 @@ using BasicLayeredService.API.Domain;
 
 namespace BasicLayeredService.API.DBContext;
 
-public class PostingAPIDbContext : DbContext
+public class BaseItemDbContext : DbContext
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public PostingAPIDbContext(DbContextOptions<PostingAPIDbContext> options,
+    public BaseItemDbContext(DbContextOptions<BaseItemDbContext> options,
         IHttpContextAccessor accessor) : base(options)
     {
         _httpContextAccessor = accessor;
     }
 
-    public PostingAPIDbContext(DbContextOptions<PostingAPIDbContext> options) : base(options)
+    public BaseItemDbContext(DbContextOptions<BaseItemDbContext> options) : base(options)
     {
     }
 
     public DbSet<Post> Posts { get; set; }
+    public DbSet<Event> Events { get; set; }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        foreach (var entry in base.ChangeTracker.Entries<Post>()
+        foreach (var entry in base.ChangeTracker.Entries<BaseItem>()
             .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
         {     
             if (entry.State == EntityState.Added)
@@ -40,7 +41,7 @@ public class PostingAPIDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PostingAPIDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BaseItemDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
 }

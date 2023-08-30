@@ -12,9 +12,9 @@ internal class PostConfiguration : IEntityTypeConfiguration<Post>
     {
         builder.HasIndex(u => u.Author);
 
-        for(int i = 1; i <= 1000; i++)
+        for(int i = 1; i <= 500; i++)
         {
-            Post post = new Post();
+            Post post = new();
             post.Id = i;
             post.Author = $"author{i}";
             post.Title = $"title{i}";

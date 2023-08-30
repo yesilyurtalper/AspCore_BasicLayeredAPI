@@ -7,6 +7,7 @@ using BasicLayeredService.API.Services.Persistence;
 using BasicLayeredService.API.Constants;
 using BasicLayeredService.API.Contracts.Persistence;
 using Microsoft.EntityFrameworkCore;
+using BasicLayeredService.API.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -32,9 +33,10 @@ if (builder.Environment.IsDevelopment())
 //string conStr = "server=localhost;port=3306;database=BasicLayeredService;user=root;password=pass;";
 //string conStr = configuration.GetConnectionString("DefaultConnection");
 string conStr = Environment.GetEnvironmentVariable("DB_CON_STR");
-services.AddDbContext<PostingAPIDbContext>(options => options.UseMySQL(conStr));
+services.AddDbContext<BaseItemDbContext>(options => options.UseMySQL(conStr));
 
-services.AddScoped<IPostRepo, DBPostRepo>();
+services.AddScoped<IBaseItemRepo<Post>, DbBaseItemRepo<Post>>();
+services.AddScoped<IBaseItemRepo<Event>, DbBaseItemRepo<Event>>();
 
 services.AddAuthServices();
 services.AddHttpClients();
@@ -46,7 +48,7 @@ var app = builder.Build();
 //Migrate latest database changes during startup
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<PostingAPIDbContext>();
+    var dbContext = scope.ServiceProvider.GetRequiredService<BaseItemDbContext>();
     dbContext.Database.Migrate();
 }
 
