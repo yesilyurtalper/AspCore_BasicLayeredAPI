@@ -9,7 +9,7 @@ namespace ECommerce.APIs.ItemAPI.Controllers;
 [ApiController]
 public class BaseItemController <TModel> : ControllerBase where TModel : BaseItem 
 {
-    private readonly IBaseItemRepo<TModel> _repo;
+    protected readonly IBaseItemRepo<TModel> _repo;
     private readonly ILogger<BaseItemController<TModel>> _logger;
 
     public BaseItemController(IBaseItemRepo<TModel> repo, ILogger<BaseItemController<TModel>> logger)

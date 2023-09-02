@@ -36,7 +36,7 @@ string conStr = Environment.GetEnvironmentVariable("DB_CON_STR");
 services.AddDbContext<BaseItemDbContext>(options => options.UseMySQL(conStr));
 
 services.AddScoped<IBaseItemRepo<Post>, DbBaseItemRepo<Post>>();
-services.AddScoped<IBaseItemRepo<Event>, DbBaseItemRepo<Event>>();
+services.AddScoped<IEventRepo, DbEventRepo>();
 
 services.AddAuthServices();
 services.AddHttpClients();

@@ -12,6 +12,7 @@ public class ValidationFilter : IAsyncActionFilter
     {
         _logger = logger;
     }
+
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
         if (!context.ModelState.IsValid)
