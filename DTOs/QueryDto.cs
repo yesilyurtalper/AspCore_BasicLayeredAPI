@@ -12,8 +12,17 @@ public class QueryDto
 
     public string? Author { get; set; }
 
-    public DateTime? Date { get; set; }
+    public DateTime? DateStart { get; set; }
 
-    public double? Price { get; set; }
+    public DateTime? DateEnd { get; set; }
 
+    public double? PriceStart { get; set; }
+
+    public double? PriceEnd { get; set; }
+
+    public int? Count { get; set; }
+
+    public int? LastId { get; set; }
+
+    public int? Direction { get; set;}
 }

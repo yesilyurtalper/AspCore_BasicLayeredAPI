@@ -23,7 +23,7 @@ public class EventController : BaseItemController<Event>
         var events = await _repo.QueryAsync(dto);
 
         if (events.Count == 0)
-            throw new NotFoundException($"No post found");
+            throw new NotFoundException($"No event found");
         else
             return new ResponseDto<List<Event>>
             {
