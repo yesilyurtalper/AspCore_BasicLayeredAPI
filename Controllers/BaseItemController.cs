@@ -127,7 +127,7 @@ public class BaseItemController <TModel> : ControllerBase where TModel : BaseIte
         if (item == null || item.Id == 0 || id != item.Id)
             throw new BadRequestException("No input or invalid input for Id");
 
-        var model = await _repo.GetByIdAsync(item.Id);
+        var model = await _repo.GetByIdAsNoTrackingAsync(item.Id);
         if (model == null)
             throw new NotFoundException(nameof(Post), item.Id);
 
@@ -142,8 +142,7 @@ public class BaseItemController <TModel> : ControllerBase where TModel : BaseIte
         //if (existing != null && model.Id != existing.Id)
         //    throw new BadRequestException($"{typeof(TModel).Name} with name = {command._dto.Name} already exists!");
 
-        model.Title = item.Title;
-        model.Body = item.Body;
+        model = item;
         model.DateModified = DateTime.UtcNow;
 
         await _repo.UpdateAsync(model);

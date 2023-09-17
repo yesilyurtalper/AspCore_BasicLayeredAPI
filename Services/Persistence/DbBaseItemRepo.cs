@@ -40,6 +40,11 @@ public class DbBaseItemRepo<TModel> : IBaseItemRepo<TModel> where TModel : BaseI
         return await _dbSet.FindAsync(id); 
     }
 
+    public virtual async Task<TModel> GetByIdAsNoTrackingAsync(int id)
+    {
+        return await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+    }
+
     public virtual async Task<List<TModel>> GetByAuthorAsync(string author)
     {
         return await _dbSet.Where(x => x.Author == author).ToListAsync();
