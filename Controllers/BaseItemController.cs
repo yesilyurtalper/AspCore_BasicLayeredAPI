@@ -80,7 +80,7 @@ public class BaseItemController <TModel> : ControllerBase where TModel : BaseIte
             IsSuccess = true,
             Data = item,
             ResultCode = "200",
-            Message = "Post created successfully!",
+            Message = "Item created successfully!",
         };
 
         _logger.LogInformation("{@response}", response);
