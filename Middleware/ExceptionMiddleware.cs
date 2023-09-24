@@ -30,25 +30,29 @@ public class ExceptionMiddleware
 
     private async Task HandleExceptionAsync(HttpContext httpContext, Exception ex)
     {
-        HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
         ResponseDto<string> problem = new();
 
         switch (ex)
         {
             case BadRequestException:
-                statusCode = HttpStatusCode.BadRequest;
+                httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                problem.ErrorMessages = new List<string> { ex.Message };
                 break;
             case NotFoundException:
-                statusCode = HttpStatusCode.NotFound;
+                httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                problem.ErrorMessages = new List<string> { ex.Message };
                 break;
             case NotAllowedException:
-                statusCode = HttpStatusCode.Forbidden;
+                httpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                problem.ErrorMessages = new List<string> { ex.Message };
+                break;
+            default:
+                httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                problem.ErrorMessages = new List<string> { ex.ToString() };
                 break;
         }
 
-        httpContext.Response.StatusCode = (int)statusCode;
         problem.ResultCode = httpContext.Response.StatusCode.ToString();
-        problem.ErrorMessages = new List<string> { ex.ToString() };
         problem.Message = ex.Message;
 
         _logger.LogError("{@problem}",problem);

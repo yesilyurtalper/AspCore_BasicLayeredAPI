@@ -18,14 +18,14 @@ public class EventController : BaseItemController<Event>
     }
 
     [HttpPost]
-    public async Task<ResponseDto<List<Event>>> QueryAsync(QueryDto dto)
+    public async Task<ResponseDto<QueryResult<List<Event>>>> QueryAsync(QueryDto dto)
     {
-        var events = await _repo.QueryAsync(dto);
+        var queryResult = await _repo.QueryAsync(dto);
 
-        return new ResponseDto<List<Event>>
+        return new ResponseDto<QueryResult<List<Event>>>
         {
             IsSuccess = true,
-            Data = events,
+            Data = queryResult,
             ResultCode = "200",
         };
 

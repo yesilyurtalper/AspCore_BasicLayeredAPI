@@ -20,9 +20,7 @@ public class QueryDto
 
     public double? PriceEnd { get; set; }
 
-    public int? Count { get; set; }
-
     public int? LastId { get; set; }
 
-    public int? Direction { get; set;}
+    public DateTime? LastDate { get; set; }
 }

@@ -138,14 +138,8 @@ public class BaseItemController <TModel> : ControllerBase where TModel : BaseIte
                     FirstOrDefault(c => c.Type == "preferred_username").Value)
             throw new NotAllowedException($"Authors are different");
 
-        //var existing = await _repo.GetByNameAsync(dto.Name);
-        //if (existing != null && model.Id != existing.Id)
-        //    throw new BadRequestException($"{typeof(TModel).Name} with name = {command._dto.Name} already exists!");
-
-        model = item;
-        model.DateModified = DateTime.UtcNow;
-
-        await _repo.UpdateAsync(model);
+        item.DateCreated = model.DateCreated;
+        await _repo.UpdateAsync(item);
 
         var response = new ResponseDto<TModel>
         {

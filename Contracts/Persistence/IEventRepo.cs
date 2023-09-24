@@ -5,5 +5,5 @@ namespace BasicLayeredService.API.Contracts.Persistence;
 
 public interface IEventRepo : IBaseItemRepo<Event>
 {
-    Task<List<Event>> QueryAsync(QueryDto dto);
+    Task<QueryResult<List<Event>>> QueryAsync(QueryDto dto);
 }

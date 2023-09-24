@@ -20,7 +20,7 @@ public class ErrorMiddleware
         await _next(httpContext);
         var statusCode = httpContext.Response.StatusCode;
 
-        if (!APIConstants.KnownCodes.Contains(statusCode) 
+        if (statusCode != 200 && statusCode != 400 
             && statusCode.ToString().StartsWith("4"))
         {
             var desc = APIConstants.StatusDescriptions.TryGetValue(statusCode, out var message);

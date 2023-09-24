@@ -2,10 +2,11 @@
 
 public class APIConstants
 {
-    public static int[] KnownCodes = { 200, 400, 404 };
     public static Dictionary<int, string> StatusDescriptions = new () {
         { 401,"Kullanıcı doğrulanamadı"},
-        { 403,"Yetkiniz yetersiz" }
+        { 403,"Yetkiniz yetersiz" },
+        { 404,"Kaynak bulunamadı" },
+        { 405,"Method bulunamadı" }
     };
     public static string OrderAPIClient = "OrderAPIClient";
     public static string OrderAPIBaseUrl = "OrderAPIClient";
