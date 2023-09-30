@@ -18,7 +18,7 @@ public class DbEventRepo : DbBaseItemRepo<Event>, IEventRepo
     {
         var query = _dbContext.Events.AsQueryable().AsNoTracking();
 
-        if (dto.Id != null)
+        if (dto.Id != null && dto.Id != 0)
             query = query.Where(e => e.Id == dto.Id);
 
         if(!string.IsNullOrEmpty(dto.Author))
@@ -36,20 +36,17 @@ public class DbEventRepo : DbBaseItemRepo<Event>, IEventRepo
         if (dto.DateEnd != null)
             query = query.Where(e => e.Date <= dto.DateEnd);
 
-        if (dto.PriceStart != null)
+        if (dto.PriceStart != null && dto.PriceStart != 0)
             query = query.Where(e => e.Price >= dto.PriceStart);
 
-        if (dto.PriceEnd != null)
+        if (dto.PriceEnd != null && dto.PriceEnd != 0)
             query = query.Where(e => e.Price <= dto.PriceEnd);
 
         var count = await query.CountAsync();
 
         query = query.OrderByDescending(e => e.Id);
 
-        if (dto.LastId != null && dto.LastId != 0)
-            query = query.Where(e => e.Id < dto.LastId);
-
-        var items = await query.Take(100).ToListAsync();
+        var items = await query.Skip(dto.page*dto.pageSize).Take(dto.pageSize).ToListAsync();
 
         return new QueryResult<List<Event>>(items,count);
     }
