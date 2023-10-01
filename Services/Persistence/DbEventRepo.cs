@@ -44,9 +44,23 @@ public class DbEventRepo : DbBaseItemRepo<Event>, IEventRepo
 
         var count = await query.CountAsync();
 
-        query = query.OrderByDescending(e => e.Id);
+        var items = new List<Event>();
 
-        var items = await query.Skip(dto.page*dto.pageSize).Take(dto.pageSize).ToListAsync();
+        if(dto.LastId != null)
+        {
+            query = query.OrderByDescending(e => e.Id);
+            if(dto.LastId <= 0)
+                items = await query.Take(dto.PageSize).ToListAsync();
+            else
+                items = await query.Where(e => e.Id < dto.LastId).Take(dto.PageSize).ToListAsync();
+        }
+            
+        else if(dto.FirstId != null)
+        {
+            query = query.OrderBy(e => e.Id);
+            items = await query.Where(e => e.Id >  dto.FirstId).Take(dto.PageSize).ToListAsync();
+            items.Reverse();
+        }
 
         return new QueryResult<List<Event>>(items,count);
     }

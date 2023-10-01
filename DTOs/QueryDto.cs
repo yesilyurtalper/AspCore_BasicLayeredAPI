@@ -20,7 +20,9 @@ public class QueryDto
 
     public double? PriceEnd { get; set; }
 
-    public int pageSize { get; set; } = 10;
+    public int PageSize { get; set; } = 10;
 
-    public int page { get; set; } = 0;
+    public int? LastId { get; set; }
+
+    public int? FirstId { get; set; }
 }
