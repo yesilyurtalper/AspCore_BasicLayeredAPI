@@ -7,22 +7,22 @@ using System.Linq;
 
 namespace BasicLayeredService.API.Services.Persistence;
 
-public class DbEventRepo : DbBaseItemRepo<Event>, IEventRepo    
+public class DbEventRepo : DbBaseItemRepo<Event>, IEventRepo
 {
     public DbEventRepo(BaseItemDbContext context) : base(context)
     {
-        
+
     }
 
-    public async Task<QueryResult<List<Event>>> QueryAsync(QueryDto dto)
+    public async Task<QueryResult<Event>> QueryAsync(QueryDto dto)
     {
         var query = _dbContext.Events.AsQueryable().AsNoTracking();
 
         if (dto.Id != null && dto.Id != 0)
             query = query.Where(e => e.Id == dto.Id);
 
-        if(!string.IsNullOrEmpty(dto.Author))
-            query = query.Where(e => e.Author == dto.Author);
+        if (!string.IsNullOrEmpty(dto.Author))
+            query = query.Where(e => e.Author.Contains(dto.Author));
 
         if (!string.IsNullOrEmpty(dto.Title))
             query = query.Where(e => !string.IsNullOrEmpty(e.Title) && e.Title.Contains(dto.Title));
@@ -42,26 +42,20 @@ public class DbEventRepo : DbBaseItemRepo<Event>, IEventRepo
         if (dto.PriceEnd != null && dto.PriceEnd != 0)
             query = query.Where(e => e.Price <= dto.PriceEnd);
 
-        var count = await query.CountAsync();
+        var totalItems = await query.CountAsync();
+        var totalPages = (int)Math.Ceiling(totalItems / (double)dto.PageSize);
 
         var items = new List<Event>();
 
-        if(dto.LastId != null)
-        {
-            query = query.OrderByDescending(e => e.Id);
-            if(dto.LastId <= 0)
-                items = await query.Take(dto.PageSize).ToListAsync();
-            else
-                items = await query.Where(e => e.Id < dto.LastId).Take(dto.PageSize).ToListAsync();
-        }
-            
-        else if(dto.FirstId != null)
-        {
-            query = query.OrderBy(e => e.Id);
-            items = await query.Where(e => e.Id >  dto.FirstId).Take(dto.PageSize).ToListAsync();
-            items.Reverse();
-        }
+        if (dto.Descending)
+            query = query.OrderByDescending(item => item.Date);
+        else
+            query = query.OrderBy(item => item.Date);
 
-        return new QueryResult<List<Event>>(items,count);
+        items = await query.Skip((dto.PageNumber - 1) * dto.PageSize)
+                                     .Take(dto.PageSize)
+                                     .ToListAsync();
+
+        return new QueryResult<Event>(items, totalItems, totalPages);
     }
 }

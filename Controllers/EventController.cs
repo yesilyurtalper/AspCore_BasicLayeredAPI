@@ -17,8 +17,9 @@ public class EventController : BaseItemController<Event>
         _repo = repo;
     }
 
-    [HttpPost]
-    public async Task<ResponseDto<QueryResult<List<Event>>>> QueryAsync(QueryDto dto)
+    [HttpGet]
+    [Route("query")]
+    public async Task<ResponseDto<QueryResult<List<Event>>>> QueryAsync([FromQuery] QueryDto dto)
     {
         var queryResult = await _repo.QueryAsync(dto);
 

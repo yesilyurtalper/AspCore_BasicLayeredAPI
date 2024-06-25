@@ -15,10 +15,10 @@ public static class AuthServiceRegistration
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateAudience = true,
-                ValidAudiences = new[] { "BasicLayeredServiceAPI", "BasicLayeredServiceClient_React" },
+                ValidAudiences = new[] { "BasicReactClient" },
                 ValidateIssuer = true,
                 ValidIssuers = new List<string> { 
-                    "http://localhost:8080/auth/realms/local_realm",
+                    "http://localhost:8080/realms/local_realm",
                     Environment.GetEnvironmentVariable("OIDC_AUTHORITY")
         }
             };

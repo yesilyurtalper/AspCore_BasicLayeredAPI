@@ -1,20 +1,9 @@
-﻿{
-  "$schema": "https://json.schemastore.org/launchsettings.json",
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:21903",
-      "sslPort": 44380
-    }
-  },
+{
   "profiles": {
     "BasicLayeredService.API": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7045;http://localhost:5221",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DB_CON_STR": "server=localhost;port=3306;database=BasicLayeredService;user=root;password=pass;",
@@ -23,7 +12,9 @@
         "ELK_PASS": "password",
         "ELK_USER": "elastic",
         "LOG_LEVEL": "info"
-      }
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7045;http://localhost:5221"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -32,6 +23,41 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+
+    //"Docker": {
+    //  "commandName": "Docker",
+    //  "launchBrowser": true,
+    //  "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+    //  "publishAllPorts": true,
+    //  "useSSL": true
+    //},
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true,
+      "sslPort": 49163,
+      "useSSL": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DB_CON_STR": "server=mysql;port=3306;database=BasicLayeredService;user=root;password=pass;",
+        "OIDC_AUTHORITY": "http://keycloak:8080/realms/local_realm",
+        "ELK_URL": "http://localhost:9200/",
+        "ELK_PASS": "password",
+        "ELK_USER": "elastic",
+        "LOG_LEVEL": "info"
+      },
+      "DockerfileRunArguments": "--network=local_network"
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:21903",
+      "sslPort": 44380
     }
   }
 }

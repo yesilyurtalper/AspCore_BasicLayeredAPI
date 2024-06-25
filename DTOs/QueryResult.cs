@@ -2,13 +2,15 @@
 
 public class QueryResult<T>  where T : class
 {
-    public T Items { get; set; }
-    public int Count { get; set; }
+    public List<T> Items { get; set; }
+    public int TotalItems { get; set; }
+    public int TotalPages { get; set; }
 
 
-    public QueryResult(T items, int count) 
+    public QueryResult(List<T> items, int totalItems, int totalPages) 
     {
         Items = items;
-        Count = count;
+        TotalItems = totalItems;
+        TotalPages = totalPages;
     }
 }

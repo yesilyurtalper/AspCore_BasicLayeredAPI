@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  basiclayeredservice.api:
+    image: ${DOCKER_REGISTRY-}basiclayeredserviceapi
+    build:
+      context: .
+      dockerfile: Dockerfile
