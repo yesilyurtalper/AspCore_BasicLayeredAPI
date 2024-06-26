@@ -35,12 +35,12 @@ public class DbBaseItemRepo<TModel> : IBaseItemRepo<TModel> where TModel : BaseI
         await _dbContext.SaveChangesAsync();
     }
 
-    public virtual async Task<TModel> GetByIdAsync(int id)
+    public virtual async Task<TModel> GetByIdAsync(Guid id)
     {
         return await _dbSet.FindAsync(id); 
     }
 
-    public virtual async Task<TModel> GetByIdAsNoTrackingAsync(int id)
+    public virtual async Task<TModel> GetByIdAsNoTrackingAsync(Guid id)
     {
         return await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
     }

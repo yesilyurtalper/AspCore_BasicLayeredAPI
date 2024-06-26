@@ -5,7 +5,7 @@ namespace BasicLayeredService.API.DTOs;
 
 public class QueryDto
 {
-    public int? Id { get; set; } 
+    public Guid? Id { get; set; } 
     public string? Title { get; set; }
 
     public string? Body { get; set; } 
@@ -23,9 +23,5 @@ public class QueryDto
     public int PageSize { get; set; } = 5;
     public int PageNumber { get; set; } = 1;
 
-    public bool Descending = false;
-
-    public int? LastId { get; set; }
-
-    public int? FirstId { get; set; }
+    public bool Descending { get; set; } = false;
 }

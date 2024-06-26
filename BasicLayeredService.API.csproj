@@ -34,6 +34,7 @@
   <ItemGroup>
     <Folder Include="DTOs\Mapping\" />
     <Folder Include="DTOs\Validation\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

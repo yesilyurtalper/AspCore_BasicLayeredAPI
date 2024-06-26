@@ -24,7 +24,7 @@ public class BaseItemController <TModel> : ControllerBase where TModel : BaseIte
         var items = await _repo.GetLatestAsync(10);
 
         if (items.Count == 0)
-            throw new NotFoundException($"No post found");
+            throw new NotFoundException($"No item found");
         else
             return new ResponseDto<List<TModel>>
             {
@@ -36,7 +36,7 @@ public class BaseItemController <TModel> : ControllerBase where TModel : BaseIte
 
     [HttpGet]
     [Route("id/{id}")]
-    public async Task<ResponseDto<TModel>> GetByIdAsync(int id)
+    public async Task<ResponseDto<TModel>> GetByIdAsync(Guid id)
     {   
         var item = await _repo.GetByIdAsync(id);
 
@@ -52,7 +52,7 @@ public class BaseItemController <TModel> : ControllerBase where TModel : BaseIte
     }
 
     [HttpGet]
-    [Route("author/{author}")]
+    [Route("{author}")]
     public async Task<ResponseDto<List<TModel>>> GetByAuthorAsync(string author)//
     {
         var items = await _repo.GetByAuthorAsync(author);
@@ -69,8 +69,7 @@ public class BaseItemController <TModel> : ControllerBase where TModel : BaseIte
     }
 
     [HttpPost]
-    [Route("create")]
-    [Route("id/{id}/copy")]
+    [Route("{id}")]
     public async Task<ResponseDto<TModel>> CreateAsync(TModel item)
     {
         await _repo.CreateAsync(item);
@@ -89,13 +88,10 @@ public class BaseItemController <TModel> : ControllerBase where TModel : BaseIte
     }
 
     [HttpDelete]
-    [Route("id/{id}")]
-    public async Task<ResponseDto<TModel>> DeleteAsync(int id,
+    [Route("{id}")]
+    public async Task<ResponseDto<TModel>> DeleteAsync(Guid id,
         [FromServices] IHttpContextAccessor contextAccessor)
     {
-        if (id == 0)
-            throw new BadRequestException("Invalid input for Id");
-
         var item = await _repo.GetByIdAsync(id);
         if (item == null)
             throw new NotFoundException(typeof(TModel).Name, id);
@@ -120,11 +116,11 @@ public class BaseItemController <TModel> : ControllerBase where TModel : BaseIte
     }
 
     [HttpPut]
-    [Route("id/{id}/update")]
-    public async Task<ResponseDto<TModel>> UpdateAsync(int id, [FromBody]TModel item, 
+    [Route("{id}")]
+    public async Task<ResponseDto<TModel>> UpdateAsync(Guid id, [FromBody]TModel item, 
         [FromServices]IHttpContextAccessor contextAccessor)
     {
-        if (item == null || item.Id == 0 || id != item.Id)
+        if (item == null || item.Id == null || id != item.Id)
             throw new BadRequestException("No input or invalid input for Id");
 
         var model = await _repo.GetByIdAsNoTrackingAsync(item.Id);

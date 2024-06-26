@@ -18,7 +18,7 @@ public class DbEventRepo : DbBaseItemRepo<Event>, IEventRepo
     {
         var query = _dbContext.Events.AsQueryable().AsNoTracking();
 
-        if (dto.Id != null && dto.Id != 0)
+        if (dto.Id != null)
             query = query.Where(e => e.Id == dto.Id);
 
         if (!string.IsNullOrEmpty(dto.Author))

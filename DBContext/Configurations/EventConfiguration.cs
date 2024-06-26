@@ -13,22 +13,23 @@ public class EventConfiguration : IEntityTypeConfiguration<Event>
         builder.HasIndex(u => u.Author);
         builder.HasIndex(u => u.Date);
 
-        for (int i = 1; i <= 500; i++)
+        for (int i = 1; i <= 1000; i++)
         {
-            Event ev = new();
-            ev.Id = i;
-            ev.Author = $"organizer{i}";
-            ev.Title = $"name{i}";
-            ev.Body = $"descr{i} " +
-                $"descr{i} descr{i} " +
-                $"descr{i} descr{i} descr{i} " +
-                $"descr{i}";
-            ev.DateCreated = DateTime.Now;
+            Event ev = new()
+            {
+                Id = Guid.NewGuid(),
+                Author = $"author{i}",
+                Title = $"name{i}",
+                Body = $@"descr{i} descr{i} descr{i} descr{i} descr{i} descr{i}
+                    descr{i}",
+                DateCreated = DateTime.Now.AddDays(i%2 == 0 ? i : -i) ,
+                Price = i,
+                Capacity = i
+            };
+
             ev.DateModified = ev.DateCreated;
             ev.Date = ev.DateCreated;
-            ev.Price = 12.12;
-            ev.Capacity = 12345;
-            
+
             builder.HasData(ev);
         }
     }

@@ -12,17 +12,20 @@ internal class PostConfiguration : IEntityTypeConfiguration<Post>
     {
         builder.HasIndex(u => u.Author);
 
-        for(int i = 1; i <= 500; i++)
+        for (int i = 1; i <= 500; i++)
         {
-            Post post = new();
-            post.Id = i;
-            post.Author = $"author{i}";
-            post.Title = $"title{i}";
-            post.Body = $"body{i} " +
+            Post post = new()
+            {
+                Id = Guid.NewGuid(),
+                Author = $"author{i}",
+                Title = $"title{i}",
+                Body = $"body{i} " +
                 $"body{i} body{i} " +
                 $"body{i} body{i} body{i} " +
-                $"body{i}";
-            post.DateCreated = DateTime.Now;
+                $"body{i}",
+                DateCreated = DateTime.Now
+            };
+
             post.DateModified = post.DateCreated;
 
             builder.HasData(post);

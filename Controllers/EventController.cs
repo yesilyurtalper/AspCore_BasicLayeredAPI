@@ -19,11 +19,11 @@ public class EventController : BaseItemController<Event>
 
     [HttpGet]
     [Route("query")]
-    public async Task<ResponseDto<QueryResult<List<Event>>>> QueryAsync([FromQuery] QueryDto dto)
+    public async Task<ResponseDto<QueryResult<Event>>> QueryAsync([FromQuery] QueryDto dto)
     {
         var queryResult = await _repo.QueryAsync(dto);
 
-        return new ResponseDto<QueryResult<List<Event>>>
+        return new ResponseDto<QueryResult<Event>>
         {
             IsSuccess = true,
             Data = queryResult,

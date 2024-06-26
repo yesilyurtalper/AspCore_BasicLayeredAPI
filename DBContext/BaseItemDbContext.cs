@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BasicLayeredService.API.Domain;
+using System.ComponentModel;
 
 namespace BasicLayeredService.API.DBContext;
 
@@ -27,6 +28,7 @@ public class BaseItemDbContext : DbContext
         {     
             if (entry.State == EntityState.Added)
             {
+                entry.Entity.Id = Guid.NewGuid(); 
                 entry.Entity.Author = _httpContextAccessor.HttpContext.User.Claims.
                     FirstOrDefault(c => c.Type == "preferred_username").Value;
                 entry.Entity.DateCreated = DateTime.Now;

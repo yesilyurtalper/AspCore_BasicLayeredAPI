@@ -7,7 +7,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DB_CON_STR": "server=localhost;port=3306;database=BasicLayeredService;user=root;password=pass;",
-        "OIDC_AUTHORITY": "http://localhost:8080/auth/realms/local_realm",
+        "OIDC_AUTHORITY": "http://localhost:8080/realms/local_realm",
         "ELK_URL": "http://localhost:9200/",
         "ELK_PASS": "password",
         "ELK_USER": "elastic",

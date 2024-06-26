@@ -5,7 +5,7 @@ namespace BasicLayeredService.API.Domain;
 public class BaseItem
 {
     [Required]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string? Title { get; set; }
 
     [Required]
