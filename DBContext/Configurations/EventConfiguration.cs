@@ -12,6 +12,8 @@ public class EventConfiguration : IEntityTypeConfiguration<Event>
     {
         builder.HasIndex(u => u.Author);
         builder.HasIndex(u => u.Date);
+        builder.HasIndex(u => u.DateModified);
+        builder.HasIndex(u => u.DateCreated);
 
         for (int i = 1; i <= 1000; i++)
         {

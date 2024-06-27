@@ -21,7 +21,7 @@ public class ValidationFilter : IAsyncActionFilter
                 .Where(x => x.Value.Errors.Count > 0)
                 .ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Errors.Select(x => x.ErrorMessage)).ToArray();
 
-            ResponseDto<string> problem = new()
+            ErrorDto problem = new()
             {
                 Message = "There are errors in the request",
                 ResultCode = "400",

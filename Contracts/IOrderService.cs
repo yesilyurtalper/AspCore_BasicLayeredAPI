@@ -9,5 +9,5 @@ namespace BasicLayeredService.API.Contracts;
 
 public interface IOrderService
 {
-    public  Task<ResponseDto<string>> MakeOrderAsync();
+    public  Task<bool> MakeOrderAsync();
 }

@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Components.Forms;
 namespace ECommerce.APIs.ItemAPI.Controllers;
 
 [Route("api/posts")]
-public class PostController : BaseItemController<Post>
+public class PostController : BaseItemController<Post,BaseQueryDto>
 {
 
-    public PostController(IBaseItemRepo<Post> repo, ILogger<PostController> logger) : base(repo, logger)
+    public PostController(IBaseItemRepo<Post, BaseQueryDto> repo, 
+        ILogger<PostController> logger) : base(repo, logger)
     {
     }
 

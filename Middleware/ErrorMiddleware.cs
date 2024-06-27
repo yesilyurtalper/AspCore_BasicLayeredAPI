@@ -26,10 +26,9 @@ public class ErrorMiddleware
             var desc = APIConstants.StatusDescriptions.TryGetValue(statusCode, out var message);
             if (!desc)
                 message = statusCode.ToString();
-            ResponseDto<string> problem = new()
+            ErrorDto problem = new()
             {
                 ResultCode = statusCode.ToString(),
-                IsSuccess = false,
                 Message = message,
                 ErrorMessages = new List<string> {message}
             };

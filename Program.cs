@@ -8,6 +8,7 @@ using BasicLayeredService.API.Constants;
 using BasicLayeredService.API.Contracts.Persistence;
 using Microsoft.EntityFrameworkCore;
 using BasicLayeredService.API.Domain;
+using BasicLayeredService.API.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -22,7 +23,7 @@ services.AddControllers(options => {
     AddJsonOptions(options =>
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
-services.AddScoped<ResultLoggerAttribute>();
+services.AddScoped<ResultLoggerFilter>();
 
 builder.Host.AddCustomSerilog();
 
@@ -35,8 +36,8 @@ if (builder.Environment.IsDevelopment())
 string conStr = Environment.GetEnvironmentVariable("DB_CON_STR");
 services.AddDbContext<BaseItemDbContext>(options => options.UseMySQL(conStr));
 
-services.AddScoped<IBaseItemRepo<Post>, DbBaseItemRepo<Post>>();
-services.AddScoped<IEventRepo, DbEventRepo>();
+services.AddScoped<IBaseItemRepo<Post, BaseQueryDto>, DbBaseItemRepo<Post, BaseQueryDto>>();
+services.AddScoped<IBaseItemRepo<Event, EventQueryDto>, DbBaseItemRepo<Event,EventQueryDto>>();
 
 services.AddAuthServices();
 services.AddHttpClients();

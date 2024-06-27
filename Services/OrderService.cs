@@ -16,7 +16,7 @@ internal class OrderService : IOrderService
 
     }
 
-    public async Task<ResponseDto<string>> MakeOrderAsync()
+    public async Task<bool> MakeOrderAsync()
     {
         var httpClient = _httpFactory.CreateClient(APIConstants.OrderAPIClient);
         var httpResponse = await httpClient.SendAsync(new HttpRequestMessage());

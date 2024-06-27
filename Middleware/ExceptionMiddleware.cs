@@ -30,7 +30,7 @@ public class ExceptionMiddleware
 
     private async Task HandleExceptionAsync(HttpContext httpContext, Exception ex)
     {
-        ResponseDto<string> problem = new();
+        ErrorDto problem = new();
 
         switch (ex)
         {

@@ -8,27 +8,10 @@ using Microsoft.AspNetCore.Authorization;
 namespace ECommerce.APIs.ItemAPI.Controllers;
 
 [Route("api/events")]
-public class EventController : BaseItemController<Event>
+public class EventController : BaseItemController<Event,EventQueryDto>
 {
-    private new readonly IEventRepo _repo;
-
-    public EventController(IEventRepo repo, ILogger<EventController> logger) : base(repo, logger)
-    {   
-        _repo = repo;
-    }
-
-    [HttpGet]
-    [Route("query")]
-    public async Task<ResponseDto<QueryResult<Event>>> QueryAsync([FromQuery] QueryDto dto)
+    public EventController(IBaseItemRepo<Event, EventQueryDto> repo,
+        ILogger<EventController> logger) : base(repo, logger)
     {
-        var queryResult = await _repo.QueryAsync(dto);
-
-        return new ResponseDto<QueryResult<Event>>
-        {
-            IsSuccess = true,
-            Data = queryResult,
-            ResultCode = "200",
-        };
-
     }
 }

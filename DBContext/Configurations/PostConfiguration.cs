@@ -11,6 +11,8 @@ internal class PostConfiguration : IEntityTypeConfiguration<Post>
     public void Configure(EntityTypeBuilder<Post> builder)
     {
         builder.HasIndex(u => u.Author);
+        builder.HasIndex(u => u.DateModified);
+        builder.HasIndex(u => u.DateCreated);
 
         for (int i = 1; i <= 500; i++)
         {
@@ -23,7 +25,7 @@ internal class PostConfiguration : IEntityTypeConfiguration<Post>
                 $"body{i} body{i} " +
                 $"body{i} body{i} body{i} " +
                 $"body{i}",
-                DateCreated = DateTime.Now
+                DateCreated = DateTime.Now.AddDays(i%2 == 0 ? i : -i),
             };
 
             post.DateModified = post.DateCreated;
