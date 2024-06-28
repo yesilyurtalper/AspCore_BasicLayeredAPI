@@ -5,7 +5,7 @@ using BasicLayeredService.API.DTOs;
 using BasicLayeredService.API.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 
-namespace ECommerce.APIs.ItemAPI.Controllers;
+namespace BasicLayeredService.API.Controllers;
 
 [Route("api/events")]
 public class EventController : BaseItemController<Event,EventQueryDto>

@@ -4,16 +4,16 @@ using BasicLayeredService.API.Contracts.Persistence;
 using BasicLayeredService.API.DTOs;
 using BasicLayeredService.API.Domain;
 using Microsoft.AspNetCore.Components.Forms;
+using BasicLayeredService.API.Exceptions;
 
-namespace ECommerce.APIs.ItemAPI.Controllers;
+namespace BasicLayeredService.API.Controllers;
 
 [Route("api/posts")]
-public class PostController : BaseItemController<Post,BaseQueryDto>
+public class PostController : BaseItemController<Post,PostQueryDto>
 {
 
-    public PostController(IBaseItemRepo<Post, BaseQueryDto> repo, 
+    public PostController(IBaseItemRepo<Post, PostQueryDto> repo, 
         ILogger<PostController> logger) : base(repo, logger)
     {
     }
-
 }

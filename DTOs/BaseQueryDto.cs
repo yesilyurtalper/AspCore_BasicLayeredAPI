@@ -27,7 +27,7 @@ public class BaseQueryDto
 
     public int SortByBody { get; set; }
 
-    public int SortByDateCreated { get; set; }
+    public int SortByDateCreated { get; set; } = 1;
 
     public int SortByDateModified { get; set; }
 }

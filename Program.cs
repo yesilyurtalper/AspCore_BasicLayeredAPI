@@ -36,8 +36,8 @@ if (builder.Environment.IsDevelopment())
 string conStr = Environment.GetEnvironmentVariable("DB_CON_STR");
 services.AddDbContext<BaseItemDbContext>(options => options.UseMySQL(conStr));
 
-services.AddScoped<IBaseItemRepo<Post, BaseQueryDto>, DbBaseItemRepo<Post, BaseQueryDto>>();
-services.AddScoped<IBaseItemRepo<Event, EventQueryDto>, DbBaseItemRepo<Event,EventQueryDto>>();
+services.AddScoped<IBaseItemRepo<Post, PostQueryDto>, DbBaseItemRepo<Post, PostQueryDto>>();
+services.AddScoped<IBaseItemRepo<Event, EventQueryDto>, DbEventRepo>();
 
 services.AddAuthServices();
 services.AddHttpClients();

@@ -74,6 +74,16 @@ public class DbEventRepo : DbBaseItemRepo<Event,EventQueryDto>
         else if (dto.SortByBody == -1)
             query = query.OrderByDescending(item => item.Body);
 
+        if (dto.SortByPrice == 1)
+            query = query.OrderBy(item => item.Price);
+        else if (dto.SortByPrice == -1)
+            query = query.OrderByDescending(item => item.Price);
+
+        if (dto.SortByDate == 1)
+            query = query.OrderBy(item => item.Date);
+        else if (dto.SortByDate == -1)
+            query = query.OrderByDescending(item => item.Date);
+
         if (dto.SortByDateCreated == 1)
             query = query.OrderBy(item => item.DateCreated);
         else if (dto.SortByDateCreated == -1)

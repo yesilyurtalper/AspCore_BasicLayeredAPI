@@ -5,7 +5,7 @@ using BasicLayeredService.API.Domain;
 using BasicLayeredService.API.Exceptions;
 using BasicLayeredService.API.Filters;
 
-namespace ECommerce.APIs.ItemAPI.Controllers;
+namespace BasicLayeredService.API.Controllers;
 
 [ApiController]
 public class BaseItemController<TModel, TQuery> : ControllerBase
@@ -45,7 +45,7 @@ public class BaseItemController<TModel, TQuery> : ControllerBase
     public async Task<ActionResult<TModel>> CreateAsync(TModel item)
     {
         await _repo.CreateAsync(item);
-        return CreatedAtAction(nameof(GetByIdAsync), new { id = item.Id }, item);
+        return Ok(item);
     }
 
     [HttpDelete]
@@ -76,7 +76,7 @@ public class BaseItemController<TModel, TQuery> : ControllerBase
             throw new BadRequestException("No input or invalid input for Id");
 
         var model = await _repo.GetByIdAsNoTrackingAsync(item.Id) ??
-            throw new NotFoundException(nameof(Post), item.Id);
+            throw new NotFoundException(nameof(BaseItem), item.Id);
 
         if (item.Author != model.Author)
             throw new NotAllowedException($"Authors are different");

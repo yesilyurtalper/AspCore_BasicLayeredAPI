@@ -12,4 +12,8 @@ public class EventQueryDto : BaseQueryDto
     public double? PriceStart { get; set; }
 
     public double? PriceEnd { get; set; }
+
+    public int SortByPrice { get; set; }
+
+    public int SortByDate { get; set; }
 }

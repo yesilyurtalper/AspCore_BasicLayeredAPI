@@ -6,7 +6,7 @@ namespace BasicLayeredService.API.DBContext;
 
 public class BaseItemDbContext : DbContext
 {
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IHttpContextAccessor? _httpContextAccessor;
 
     public BaseItemDbContext(DbContextOptions<BaseItemDbContext> options,
         IHttpContextAccessor accessor) : base(options)
@@ -29,8 +29,8 @@ public class BaseItemDbContext : DbContext
             if (entry.State == EntityState.Added)
             {
                 entry.Entity.Id = Guid.NewGuid(); 
-                entry.Entity.Author = _httpContextAccessor.HttpContext.User.Claims.
-                    FirstOrDefault(c => c.Type == "preferred_username").Value;
+                entry.Entity.Author = _httpContextAccessor?.HttpContext?.User?.Claims?.
+                    FirstOrDefault(c => c.Type == "preferred_username")?.Value ?? "";
                 entry.Entity.DateCreated = DateTime.Now;
                 entry.Entity.DateModified = entry.Entity.DateCreated;
             }
